@@ -1,14 +1,16 @@
 import Link from "next/link";
 import Head from "next/head";
+import { MainLayout } from "../components/MainLayout";
 
 export default function Index() {
   return (
-    <>
+    <MainLayout title="Home page">
     <Head>
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
-      <title>Next.js-course</title>
+      {/* <title>Next.js-course</title> */}
       <meta name="keywords" content="next, js, javascript, next.js, nextjs"></meta>
-      <meta name="description" content="next, js, javascript, next.js, nextjs"></meta>
+      <meta name="description" content="This tutorial for next.js"></meta>
+      <meta charSet="utf-8"/>
     </Head>
       <h1>Hello Next.js</h1>
       <p>
@@ -27,6 +29,6 @@ export default function Index() {
         temporibus cum, iure obcaecati aperiam. Soluta necessitatibus nostrum
         laborum.
       </p>
-    </>
+    </MainLayout>
   );
 }
