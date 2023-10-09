@@ -1,15 +1,15 @@
-// import NextNprogress from 'nextjs-progressbar'
+import NextNProgress from 'nextjs-progressbar';
 import '../styles/globals.css'
 
 export default function MyApp({ Component, pageProps }) {
   return (
     <>
-      {/* <NextNprogress
+      <NextNProgress
         color="yellow"
         startPosition="0.3"
         stopDelayMs="200"
         height="2"
-      /> */}
+      />
       <Component {...pageProps} />
       {/* <style jsx global>{`
         body {
