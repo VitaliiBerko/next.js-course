@@ -2,8 +2,14 @@ import axios from "axios";
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { MainLayout } from "../../components/MainLayout";
+import { NextComponentType, NextPageContext } from "next";
+import { MyPost } from "../../interface/post";
 
-export default function Post({ post: serverPost }) {
+interface PostPageProps {
+  post: MyPost
+}
+
+export default function Post({ post: serverPost }: PostPageProps) {
   const router = useRouter();
   // const { user, avatar, followers, tweets } = post
   const [post, setPost] = useState(serverPost);
@@ -36,12 +42,19 @@ export default function Post({ post: serverPost }) {
   );
 }
 
-Post.getInitialProps = async ({ query, req }) => {
+interface PostNextPageContext extends NextPageContext {
+  query: {
+    id: string;
+  };
+}
+
+Post.getInitialProps = async ({ query, req }: PostNextPageContext) => {
   if (!req) {
     return { post: null };
   }
   const response = await axios.get(`/users/${query.id}`);
-  const post = response.data;
+  
+  const post: MyPost[] = response.data;
   return { post };
 };
 

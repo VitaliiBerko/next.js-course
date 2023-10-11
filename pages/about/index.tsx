@@ -7,7 +7,7 @@ export default function About() {
   return (
 
     <MainLayout title='About page'>
-      <h1> Page About </h1>
+      <h1> About page </h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, voluptas.
       </p>

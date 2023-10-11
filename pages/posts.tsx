@@ -4,9 +4,16 @@ import { MainLayout } from "../components/MainLayout";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import { MyPost } from "../interface/post";
+import { NextPageContext } from "next";
+
 axios.defaults.baseURL = "https://63e61ee87eef5b22337f4289.mockapi.io";
 
-export default function Posts({ posts: serverPost }) {
+interface PostPageProps{
+  posts: MyPost[]
+}
+
+export default function Posts({ posts: serverPost }: PostPageProps) {
   const [posts, setPosts] = useState(serverPost);
 
   useEffect(() => {
@@ -23,7 +30,7 @@ export default function Posts({ posts: serverPost }) {
         <p>Loading...</p>
       ) : (
         <>
-          <Head>{/* <title> Posts page</title> */}</Head>
+          <Head><title> Posts page</title></Head>
           <h1>Posts Page</h1>
           {/* <pre>{JSON.stringify(posts, null, 2)}</pre> */}
           <ul>
@@ -41,10 +48,10 @@ export default function Posts({ posts: serverPost }) {
   );
 }
 
-Posts.getInitialProps = async ({ req }) => {
+Posts.getInitialProps = async ({ req }: NextPageContext) => {
   if (!req) {
     return { posts: null };
   }
-  const posts = (await axios.get("/users")).data;
+  const posts: MyPost[] = (await axios.get("/users")).data;
   return { posts };
 };
