@@ -18,7 +18,7 @@ export default function Posts({ posts: serverPost }: PostPageProps) {
 
   useEffect(() => {
     async function load() {
-      const response = await axios.get("/users");
+      const response = await axios.get(`/users`);
       setPosts(response.data);
     }
     if (!serverPost) load();
@@ -52,6 +52,6 @@ Posts.getInitialProps = async ({ req }: NextPageContext) => {
   if (!req) {
     return { posts: null };
   }
-  const posts: MyPost[] = (await axios.get("/users")).data;
+  const posts: MyPost[] = (await axios.get(`/users`)).data;
   return { posts };
 };
