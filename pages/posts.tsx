@@ -6,8 +6,10 @@ import axios from "axios";
 import Link from "next/link";
 import { MyPost } from "../interface/post";
 import { NextPageContext } from "next";
+import 'dotenv/config'
 
-axios.defaults.baseURL = "https://63e61ee87eef5b22337f4289.mockapi.io";
+
+
 
 interface PostPageProps{
   posts: MyPost[]
@@ -18,7 +20,7 @@ export default function Posts({ posts: serverPost }: PostPageProps) {
 
   useEffect(() => {
     async function load() {
-      const response = await axios.get(`/users`);
+      const response = await axios.get(`${process.env.API_URL}/users`);
       setPosts(response.data);
     }
     if (!serverPost) load();
@@ -52,6 +54,6 @@ Posts.getInitialProps = async ({ req }: NextPageContext) => {
   if (!req) {
     return { posts: null };
   }
-  const posts: MyPost[] = (await axios.get(`/users`)).data;
+  const posts: MyPost[] = (await axios.get(`${process.env.API_URL}/users`)).data;
   return { posts };
 };

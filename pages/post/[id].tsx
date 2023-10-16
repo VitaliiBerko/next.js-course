@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { MainLayout } from "../../components/MainLayout";
 import { NextComponentType, NextPageContext } from "next";
 import { MyPost } from "../../interface/post";
+import 'dotenv/config'
+
 
 interface PostPageProps {
   post: MyPost
@@ -15,7 +17,7 @@ export default function Post({ post: serverPost }: PostPageProps) {
   const [post, setPost] = useState(serverPost);
   useEffect(() => {
     async function load() {
-      const response = await axios.get(`/users/${router.query.id}`);
+      const response = await axios.get(`${process.env.API_URL}/users/${router.query.id}`);
       const data = response.data;
       setPost(data);
     }
@@ -52,7 +54,7 @@ Post.getInitialProps = async ({ query, req }: PostNextPageContext) => {
   if (!req) {
     return { post: null };
   }
-  const response = await axios.get(`/users/${query.id}`);
+  const response = await axios.get(`${process.env.API_URL}/users/${query.id}`);
   
   const post: MyPost[] = response.data;
   return { post };

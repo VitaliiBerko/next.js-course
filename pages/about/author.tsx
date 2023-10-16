@@ -1,4 +1,4 @@
-import { Router } from "next/router";
+import  Router  from "next/router";
 import { MainLayout } from "../../components/MainLayout";
 
 export default function Author() {
